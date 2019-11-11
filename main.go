@@ -51,7 +51,7 @@ func main() {
 	for scanner.Scan() {
 		url := scanner.Text()
 		sem <- struct{}{}
-		go func(url, token string) {
+		go func(url, token string, sem chan struct{}) {
 			defer func() { <-sem }()
 			log.Printf("Started processing url '%s'", url)
 			n, err := countTokenAtURL(url, token)
@@ -59,7 +59,7 @@ func main() {
 				log.Printf("Failed to process url '%s': %v", url, err)
 			}
 			log.Printf("Got result for '%s': %d entries of token '%s'", url, n, token)
-		}(url, *token)
+		}(url, *token, sem)
 	}
 
 	if err := scanner.Err(); err != nil {

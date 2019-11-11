@@ -28,3 +28,12 @@ func TestCountTokenAtURL(t *testing.T) {
 		}
 	}
 }
+
+func TestCountTokenAtURLError(t *testing.T) {
+	if _, err := countTokenAtURL("Mooo!", "cow"); err == nil {
+		t.Errorf("expected unsupported protocol scheme error, got nil")
+	}
+	if _, err := countTokenAtURL("https://golang.org", "\\\324343"); err == nil {
+		t.Errorf("expected parsing regexp error, got nil")
+	}
+}

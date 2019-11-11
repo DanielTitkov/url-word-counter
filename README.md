@@ -1,7 +1,7 @@
 # url-word-counter
 
 Simple program that counts entries of a given token (regular expressions are supported) on pages at given URLs. 
-URLs are read one by one from stdin. 
+URLs are read one by one from stdin. Probably the most convenient way is to use file with URLs as shown below but you also may use echo or just type URLs one by one by hand. 
 
 ## How to use
 
